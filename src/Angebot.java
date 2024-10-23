@@ -1,22 +1,33 @@
-import java.time.LocalDate;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Angebot {
 
     private double regualrpreis;
 
-    private LocalDate flugdatum;
+    private GregorianCalendar flugdatum;
 
     private String flugnummer;
 
-    public Angebot(double regualrpreis, LocalDate flugdatum, String flugnummer) {
+    private Preisstrategie rabattstrategie;
+
+    public Angebot(double regualrpreis, GregorianCalendar flugdatum, String flugnummer) {
         setRegualrpreis(regualrpreis);
         setFlugdatum(flugdatum);
         setFlugnummer(flugnummer);
     }
 
     public void rabattstrategieWählen(){
+        int monat = flugdatum.get(GregorianCalendar.MONTH);
 
+
+        if (monat == 1 || monat == 4 || monat == 10) {
+            rabattstrategie = new MaxiDiscount();
+        } else if (monat == 2 || monat == 3) {
+            rabattstrategie = new MidiDiscount();
+        } else {
+            rabattstrategie = new ZeroDiscount();
+        }
     }
 
     public double getRegualrpreis() {
@@ -32,11 +43,11 @@ public class Angebot {
 
     }
 
-    public LocalDate getFlugdatum() {
+    public GregorianCalendar getFlugdatum() {
         return flugdatum;
     }
 
-    public void setFlugdatum(LocalDate flugdatum) {
+    public void setFlugdatum(GregorianCalendar flugdatum) {
         Objects.requireNonNull(flugdatum);
         this.flugdatum = flugdatum;
     }
@@ -48,5 +59,14 @@ public class Angebot {
     public void setFlugnummer(String flugnummer) {
         Objects.requireNonNull(flugnummer);
         this.flugnummer = flugnummer;
+    }
+
+
+    public String anzeigen() {
+        return "Angebot{" +
+                "regualrpreis=" + regualrpreis +
+                ", flugdatum=" + flugdatum +
+                ", flugnummer='" + flugnummer + '\'' +
+                '}';
     }
 }

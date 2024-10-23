@@ -16,4 +16,11 @@ public class RabattStrategie{
         Objects.requireNonNull(bezeichnung);
         this.bezeichnung = bezeichnung;
     }
+
+
+    public String anzeigen() {
+        return "RabattStrategie{" +
+                "bezeichnung='" + bezeichnung + '\'' +
+                '}';
+    }
 }
