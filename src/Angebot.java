@@ -1,5 +1,4 @@
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Angebot {
