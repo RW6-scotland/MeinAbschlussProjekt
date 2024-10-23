@@ -19,4 +19,8 @@ public abstract class RabattStrategie{
 
     public abstract double getReduzierterPreis(double preisOhneNachlass);
 
+    @Override
+    public String toString() {
+        return bezeichnung;
+    }
 }

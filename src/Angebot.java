@@ -22,7 +22,6 @@ public class Angebot {
     public void rabattstrategieWählen(){
         int monat = flugdatum.getMonthValue();
 
-
         if (monat == 1 || monat == 4 || monat == 10) {
             rabattstrategie = new MaxiDiscount("MaxiDiscount 30%");
         } else if (monat == 2 || monat == 3) {
@@ -69,13 +68,13 @@ public class Angebot {
 
 
     public String anzeigen() {
-        return "Angebot{ " +
-                "regularpreis=" + regularpreis + ",\n" +
-                "flugdatum=" + flugdatum.toString() + ",\n" +
-                "flugnummer='" + flugnummer + "',\n" +
-                "rabattstrategie=" + rabattstrategie + ",\n" +
-                "Rabatierter Preis: " + getReduzierterPreis() +
-                " }" + ",\n" +
-                "**************************************" + ",\n";
+        return "Angebot{ " + "\n" +
+                "Regulärer Preis: " + regularpreis + "\n" +
+                "Flugdatum: " + flugdatum.toString() + "\n" +
+                "Flugnummer: '" + flugnummer + "'\n" +
+                "Rabattstrategie: " + rabattstrategie.toString() + "\n" +
+                "Rabattierter Preis: " + getReduzierterPreis() +
+                " }" + "\n" +
+                "**************************************" + "\n";
     }
 }

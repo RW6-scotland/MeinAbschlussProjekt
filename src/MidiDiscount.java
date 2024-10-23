@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class MidiDiscount extends RabattStrategie{
 
     public MidiDiscount(String bezeichnung) {

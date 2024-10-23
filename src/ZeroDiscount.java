@@ -1,6 +1,5 @@
 public class ZeroDiscount extends RabattStrategie{
 
-
     public ZeroDiscount(String bezeichnung) {
         super(bezeichnung);
     }

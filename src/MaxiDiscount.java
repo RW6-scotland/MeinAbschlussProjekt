@@ -1,6 +1,5 @@
 public class MaxiDiscount extends  RabattStrategie{
 
-
     public MaxiDiscount(String bezeichnung) {
         super(bezeichnung);
     }
