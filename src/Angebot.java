@@ -1,53 +1,59 @@
+import java.time.LocalDate;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
 public class Angebot {
 
-    private double regualrpreis;
+    private double regularpreis;
 
-    private GregorianCalendar flugdatum;
+    private LocalDate flugdatum;
 
     private String flugnummer;
 
-    private Preisstrategie rabattstrategie;
+    private RabattStrategie rabattstrategie;
 
-    public Angebot(double regualrpreis, GregorianCalendar flugdatum, String flugnummer) {
-        setRegualrpreis(regualrpreis);
+    public Angebot(double regularpreis, LocalDate flugdatum, String flugnummer) {
+        setRegularpreis(regularpreis);
         setFlugdatum(flugdatum);
         setFlugnummer(flugnummer);
+        rabattstrategieWählen();
     }
 
     public void rabattstrategieWählen(){
-        int monat = flugdatum.get(GregorianCalendar.MONTH);
+        int monat = flugdatum.getMonthValue();
 
 
         if (monat == 1 || monat == 4 || monat == 10) {
-            rabattstrategie = new MaxiDiscount();
+            rabattstrategie = new MaxiDiscount("MaxiDiscount 30%");
         } else if (monat == 2 || monat == 3) {
-            rabattstrategie = new MidiDiscount();
+            rabattstrategie = new MidiDiscount("MidiDiscount 15%");
         } else {
-            rabattstrategie = new ZeroDiscount();
+            rabattstrategie = new ZeroDiscount("ZeroDiscount 0%");
         }
     }
 
-    public double getRegualrpreis() {
-        return regualrpreis;
+    public double getReduzierterPreis() {
+        return rabattstrategie.getReduzierterPreis(regularpreis);
     }
 
-    public void setRegualrpreis(double regualrpreis) {
-        if (regualrpreis <= 0){
-            this.regualrpreis = regualrpreis;
+    public double getRegularpreis() {
+        return regularpreis;
+    }
+
+    public void setRegularpreis(double regularpreis) {
+        if (regularpreis >= 0){
+            this.regularpreis = regularpreis;
         }else {
             throw new RuntimeException("Der Preis darf nicht 0 sein");
         }
 
     }
 
-    public GregorianCalendar getFlugdatum() {
+    public LocalDate getFlugdatum() {
         return flugdatum;
     }
 
-    public void setFlugdatum(GregorianCalendar flugdatum) {
+    public void setFlugdatum(LocalDate flugdatum) {
         Objects.requireNonNull(flugdatum);
         this.flugdatum = flugdatum;
     }
@@ -63,10 +69,13 @@ public class Angebot {
 
 
     public String anzeigen() {
-        return "Angebot{" +
-                "regualrpreis=" + regualrpreis +
-                ", flugdatum=" + flugdatum +
-                ", flugnummer='" + flugnummer + '\'' +
-                '}';
+        return "Angebot{ " +
+                "regularpreis=" + regularpreis + ",\n" +
+                "flugdatum=" + flugdatum.toString() + ",\n" +
+                "flugnummer='" + flugnummer + "',\n" +
+                "rabattstrategie=" + rabattstrategie + ",\n" +
+                "Rabatierter Preis: " + getReduzierterPreis() +
+                " }" + ",\n" +
+                "**************************************" + ",\n";
     }
 }

@@ -1,12 +1,12 @@
-import java.time.LocalDate;
-
-public class MaxiDiscount extends  Preisstrategie{
+public class MaxiDiscount extends  RabattStrategie{
 
 
-    @Override
-    public double getReduzierterPreis() {
-        return getStandartPreis() * 0.70;
+    public MaxiDiscount(String bezeichnung) {
+        super(bezeichnung);
     }
 
-
+    @Override
+    public double getReduzierterPreis(double preisOhneNachlass) {
+        return preisOhneNachlass * 0.70;
+    }
 }

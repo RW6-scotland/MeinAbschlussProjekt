@@ -1,6 +1,6 @@
 import java.util.Objects;
 
-public class RabattStrategie{
+public abstract class RabattStrategie{
 
     private String bezeichnung;
 
@@ -17,10 +17,6 @@ public class RabattStrategie{
         this.bezeichnung = bezeichnung;
     }
 
+    public abstract double getReduzierterPreis(double preisOhneNachlass);
 
-    public String anzeigen() {
-        return "RabattStrategie{" +
-                "bezeichnung='" + bezeichnung + '\'' +
-                '}';
-    }
 }
